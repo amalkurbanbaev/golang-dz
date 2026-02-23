@@ -3,10 +3,9 @@ package main
 import "fmt"
 
 func main() {
-	const USD_TO_RUB = 100
-	const amountUsd = 5
+	const USD_TO_EUR = 0.94 // 1 USD = 0.94 EUR
+	const USD_TO_RUB = 100 // 1 USD = 90 RUB
+	const EUR_TO_RUB = USD_TO_RUB / USD_TO_EUR
 
-	const totalUsdToOutcome = USD_TO_RUB * amountUsd
-
-	fmt.Println("USD_TO_RUB", totalUsdToOutcome)
+	fmt.Println("Евро к рублю = ", EUR_TO_RUB)
 }
