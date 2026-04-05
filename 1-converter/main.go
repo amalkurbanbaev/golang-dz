@@ -6,13 +6,19 @@ import (
 )
 
 // 1. Сделать меню с шагами
-
+// 2. Выделить функции
 // 3. После получения всех данных с помощью if / switch вычислить итог и вывести результат.
 
-const USD_TO_EUR = 0.94 // 1 USD = 0.94 EUR
-const USD_TO_RUB = 100  // 1 USD = 90 RUB
+const USD_TO_EUR = 0.94                    // 1 USD = 0.94 EUR
+const USD_TO_RUB = 100                     // 1 USD = 90 RUB
 const EUR_TO_RUB = USD_TO_RUB / USD_TO_EUR // 106
 const EUR_TO_USD = 1 / USD_TO_EUR
+
+func main() {
+	currency1, amount, currency2 := handleUserInput()
+
+	fmt.Println("Вы получите = ", convert(currency1, amount, currency2))
+}
 
 func convert(currency1 string, amount float64, currency2 string) float64 {
 	switch {
@@ -26,7 +32,7 @@ func convert(currency1 string, amount float64, currency2 string) float64 {
 		return amount * EUR_TO_RUB
 	case currency1 == "RUB" && currency2 == "USD":
 		return amount / USD_TO_RUB
-	case currency1 =="RUB" &&currency2 =="EUR":
+	case currency1 == "RUB" && currency2 == "EUR":
 		return amount / EUR_TO_RUB
 	}
 
@@ -60,6 +66,7 @@ func handleInputAmount() (float64, error) {
 
 }
 
+// Обрабатываем пользовательский ввод
 func handleUserInput() (string, float64, string) {
 	var currency1 string
 	var amount float64
@@ -99,6 +106,9 @@ func handleUserInput() (string, float64, string) {
 
 		if error != nil {
 			continue
+		} else if currencyInput == currency1 {
+			fmt.Println("Целевая валюта не может быть равна исходной")
+			continue
 		} else {
 			currency2 = currencyInput
 			break
@@ -107,10 +117,4 @@ func handleUserInput() (string, float64, string) {
 	}
 
 	return currency1, amount, currency2
-}
-
-func main() {
-	currency1, amount, currency2 := handleUserInput()
-
-	fmt.Println("Вы получите = ", convert(currency1, amount, currency2))
 }
